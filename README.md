@@ -111,18 +111,20 @@ The tests check the values quoted in both parts of the tutorial and the agreemen
 
 ## Citation
 
+The author names and publication details are placeholders until the articles appear. The demos give the same entries (⋯ → *Cite the tutorial*), from `docs/js/lib/tools.js`; update both together.
+
 ```bibtex
-@article{shapeservoing_partI,
-  author  = {<Author 1> and <Author 2>},
-  title   = {A Tutorial on Shape Servoing of Deformable Objects---{Part I}: Fundamentals},
-  journal = {IEEE Robotics \& Automation Magazine},
-  year    = {<year>},
+@misc{shapeservoing_partI,
+  author       = {<Authors>},
+  title        = {A Tutorial on Shape Servoing of Deformable Objects---{Part I}: Fundamentals},
+  howpublished = {<publication details>},
+  year         = {<year>},
 }
-@article{shapeservoing_partII,
-  author  = {<Author 1> and <Author 2>},
-  title   = {A Tutorial on Shape Servoing of Deformable Objects---{Part II}: Advanced Concepts},
-  journal = {IEEE Robotics \& Automation Magazine},
-  year    = {<year>},
+@misc{shapeservoing_partII,
+  author       = {<Authors>},
+  title        = {A Tutorial on Shape Servoing of Deformable Objects---{Part II}: Advanced Concepts},
+  howpublished = {<publication details>},
+  year         = {<year>},
 }
 ```
 

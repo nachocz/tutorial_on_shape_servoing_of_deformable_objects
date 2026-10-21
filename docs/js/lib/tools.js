@@ -10,7 +10,19 @@ import { h } from './ui.js';
 const pad2 = (n) => String(n).padStart(2, '0');
 
 // ------------------------------------------------------------------ citation
-// Author names and publication details are placeholders until the articles appear.
+// The citation of the tutorial, in one place. It holds placeholders until the
+// articles appear; update AUTHORS, BIB_AUTHORS, and PUBLICATION (and the README
+// citation) first with the preprints (entry 'misc'; fields such as eprint,
+// archivePrefix, primaryClass) and later with the published articles (entry
+// 'article'; journal, volume, number, pages, doi). The dialog and the BibTeX
+// follow, and the placeholder note disappears once AUTHORS is filled in.
+const AUTHORS = '<Authors>';                     // citation text
+const BIB_AUTHORS = '<Authors>';                 // BibTeX: 'Last, First and Last, First'
+const PUBLICATION = {
+    1: { details: '<publication details>', year: '<year>', entry: 'misc', fields: { howpublished: '<publication details>' } },
+    2: { details: '<publication details>', year: '<year>', entry: 'misc', fields: { howpublished: '<publication details>' } },
+};
+const PLACEHOLDER = AUTHORS.startsWith('<');
 const TITLES = {
     1: 'A Tutorial on Shape Servoing of Deformable Objects—Part I: Fundamentals',
     2: 'A Tutorial on Shape Servoing of Deformable Objects—Part II: Advanced Concepts',
@@ -22,24 +34,18 @@ const BIB_TITLES = {
 const demoLabel = (demo) => `Interactive demo ${pad2(demo.number)}: ${demo.title}`;
 
 function citation(part, demo) {
-    return `<Authors>, "${TITLES[part]}," IEEE Robotics & Automation Magazine, <year>.`
+    const { details, year } = PUBLICATION[part];
+    return `${AUTHORS}, "${TITLES[part]}," ${details}, ${year}.`
         + (demo ? ` ${demoLabel(demo)}.` : '');
 }
 
 function bibtex(part, demo) {
-    return [
-        `@article{shapeservoing_part${part === 1 ? 'I' : 'II'},`,
-        '  author  = {<Author 1> and <Author 2>},',
-        `  title   = {${BIB_TITLES[part]}},`,
-        '  journal = {IEEE Robotics \\& Automation Magazine},',
-        '  year    = {<year>},',
-        '  volume  = {<volume>},',
-        '  number  = {<number>},',
-        '  pages   = {<pages>},',
-        '  doi     = {<doi>},',
-        demo ? `  note    = {${demoLabel(demo)}},` : null,
-        '}',
-    ].filter(Boolean).join('\n');
+    const { entry, year, fields } = PUBLICATION[part];
+    const all = [['author', BIB_AUTHORS], ['title', BIB_TITLES[part]], ...Object.entries(fields),
+        ['year', year], ...(demo ? [['note', demoLabel(demo)]] : [])];
+    const width = Math.max(...all.map(([key]) => key.length));
+    return [`@${entry}{shapeservoing_part${part === 1 ? 'I' : 'II'},`,
+        ...all.map(([key, value]) => `  ${key.padEnd(width)} = {${value}},`), '}'].join('\n');
 }
 
 // The address of this page through the player, without the teaching-mode flag.
@@ -75,7 +81,7 @@ export function citeDialog(demo = null) {
     const dialog = h('dialog', { class: 'cite-dialog', 'aria-labelledby': 'citeTitle' },
         h('p', { class: 'kicker' }, demo ? `Part ${demo.part === 1 ? 'I' : 'II'} · Demo ${pad2(demo.number)}` : 'Interactive tutorial'),
         h('h2', { id: 'citeTitle' }, demo ? 'Cite this demo' : 'Cite the tutorial'),
-        h('p', { class: 'cite-note' }, 'Author names and publication details are placeholders until the articles appear. '
+        h('p', { class: 'cite-note' }, (PLACEHOLDER ? 'Author names and publication details are placeholders until the articles appear. ' : '')
             + 'The link opens this page wherever the tutorial runs locally.'),
         block('Link', stableLink(demo)),
         parts.flatMap((part) => [
