@@ -21,8 +21,8 @@ const AUTHORS = '<Authors>';                     // citation text
 const BIB_AUTHORS = '<Authors>';                 // BibTeX: 'Last, First and Last, First'
 const PUBLICATION = { details: '<publication details>', year: '<year>', entry: 'misc', fields: { howpublished: '<publication details>' } };
 const PLACEHOLDER = AUTHORS.startsWith('<');
-const TITLE = 'A Tutorial on Shape Servoing of Deformable Objects';
-const BIB_TITLE = 'A Tutorial on Shape Servoing of Deformable Objects';
+const TITLE = 'Shape Servoing of Deformable Objects: A Tutorial';
+const BIB_TITLE = 'Shape Servoing of Deformable Objects: A Tutorial';
 const LEVELS = { 1: 'Level 1 · Fundamentals', 2: 'Level 2 · Advanced concepts' };
 const demoLabel = (demo) => `Interactive demo ${pad2(demo.number)}: ${demo.title}`;
 

@@ -193,7 +193,7 @@ class PartTwo(unittest.TestCase):
 
 
 class PartTwoExtensions(unittest.TestCase):
-    """Section VIII and Appendix E: the experiments of demos 11 and 12."""
+    """Appendix E: the experiments of demos 11 and 12."""
 
     def test_moving_target_with_and_without_feedforward(self):
         # "Without feedforward, the tracking error oscillates with peaks of 0.46, and
@@ -229,7 +229,7 @@ class PartTwoExtensions(unittest.TestCase):
         self.assertAlmostEqual(results[False][0], 0.14, delta=0.005)
 
     def test_secondary_objective_of_fig7(self):
-        # Fig. 9 (beta = 0.2, marker at (-3.8, 2.8)): "the shape error remains
+        # Fig. S3 (beta = 0.2, marker at (-3.8, 2.8)): "the shape error remains
         #  below 1.4e-2 rad while the left gripper reaches the marker. Without the
         #  projection ... the shape error rises to 0.65 rad"
         results = {}
