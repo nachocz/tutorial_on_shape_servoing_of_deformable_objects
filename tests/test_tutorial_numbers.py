@@ -149,7 +149,7 @@ class PartTwo(unittest.TestCase):
         self.assertAlmostEqual(J0[9, 1], 0.03, delta=0.005)
 
     def test_feature_representations_in_closed_loop(self):
-        # Fig. 3: a disturbance pulls the grippers during the first 20 of 80 iterations.
+        # Fig. 6: a disturbance pulls the grippers during the first 20 of 80 iterations.
         # Point coordinates return the rod to the target pose; edge vectors leave it
         # shifted, and curvature-based features shifted and rotated.
         start = np.array([-2.45, 1.10, 0.55, 2.45, 1.10, -0.55])
@@ -193,7 +193,7 @@ class PartTwo(unittest.TestCase):
 
 
 class PartTwoExtensions(unittest.TestCase):
-    """Section V of Part II: the experiments of demos 11 and 12."""
+    """Section VIII and Appendix E: the experiments of demos 11 and 12."""
 
     def test_moving_target_with_and_without_feedforward(self):
         # "Without feedforward, the tracking error oscillates with peaks of 0.46, and
@@ -229,7 +229,7 @@ class PartTwoExtensions(unittest.TestCase):
         self.assertAlmostEqual(results[False][0], 0.14, delta=0.005)
 
     def test_secondary_objective_of_fig7(self):
-        # Part II, Fig. 7 (beta = 0.2, marker at (-3.8, 2.8)): "the shape error remains
+        # Fig. 9 (beta = 0.2, marker at (-3.8, 2.8)): "the shape error remains
         #  below 1.4e-2 rad while the left gripper reaches the marker. Without the
         #  projection ... the shape error rises to 0.65 rad"
         results = {}
@@ -314,7 +314,7 @@ class PartTwoExtensions(unittest.TestCase):
 
 
 def transformed_arch(angle, shift, center=(0.0, 1.15)):
-    """Grasp of the arch target moved rigidly (the pull target of the Part II disturbance)."""
+    """Grasp of the arch target moved rigidly (the pull target of the disturbance of Section VI)."""
     rotation = np.array([[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]])
     q = np.array(Q_ARCH, float)
     for i in (0, 3):

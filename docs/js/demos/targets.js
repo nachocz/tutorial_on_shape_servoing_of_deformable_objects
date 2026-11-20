@@ -194,7 +194,7 @@ export async function mount({ workspace, session, state }) {
 
     // Schematic of the feature space R^n (not computed): the feasible set S has
     // two components (equilibrium branches); the current state lies in the left
-    // one. The three cases of Part I are drawn together; the selected one is
+    // one. The three cases of the tutorial are drawn together; the selected one is
     // emphasized and the others are faded.
     const GLOBAL_NOTES = {
         reachable: '<b>Feasible and reachable.</b> The target lies in <span class="tex">\\mathcal{S}</span>, and an admissible manipulation path connects it to the current state. The recorded target above is of this kind: it was realized at another admissible grasp, and the loop reaches it.',

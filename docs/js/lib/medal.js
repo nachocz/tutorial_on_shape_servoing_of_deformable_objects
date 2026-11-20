@@ -1,7 +1,8 @@
 // Level medals. The medal body is the "dignity" silhouette, the target shape
 // of a clay-sculpting shape-comparison demo, with the same path data: a
 // head-and-neck contour that the sculptor has to
-// carve out of a block. Level 1 (Part I) is silver, level 2 (Part II) gold.
+// carve out of a block. Level 1 (fundamentals) is silver, level 2 (advanced
+// concepts) gold.
 
 // Path data of the sculpting target, in its original SVG coordinates.
 export const DIGNITY_PATH = 'm 760.7495,2617.5699 c 0.38246,3.9549 5.10303,31.8314 10.64711,41.2593 '
@@ -22,8 +23,8 @@ const METAL = {
     2: { name: 'gold', stops: ['#fff1b8', '#f2c230', '#c98a12', '#87570a'], rim: '#6e4507', ink: '#5a3804' },
 };
 const RIBBON = {
-    1: { band: '#527563', stripe: '#eaf1ed', edge: '#3e624f' },     // Part I accent
-    2: { band: '#8d6b43', stripe: '#f2eadc', edge: '#6f5232' },     // Part II accent
+    1: { band: '#527563', stripe: '#eaf1ed', edge: '#3e624f' },     // level 1 accent
+    2: { band: '#8d6b43', stripe: '#f2eadc', edge: '#6f5232' },     // level 2 accent
 };
 
 let counter = 0;
@@ -33,7 +34,9 @@ export function medalSVG(level, { size = 220, title = true } = {}) {
     const m = METAL[level] || METAL[1], r = RIBBON[level] || RIBBON[1];
     const id = `medal${level}-${++counter}`;
     const shape = `<path d="${DIGNITY_PATH}" transform="translate(${-X0} ${-Y0})"/>`;
-    const digit = String(level), part = level === 2 ? 'II' : 'I';
+    const digit = String(level), name = level === 2 ? 'ADVANCED' : 'FUNDAMENTALS';
+    // The longer name gets a smaller type, so that it stays inside the silhouette.
+    const nameStyle = name.length > 9 ? 'font-size="7.6" letter-spacing="0.7"' : 'font-size="9.5" letter-spacing="1.5"';
     // View box: the shape (0..W, 0..H) plus margins and the ribbon above it.
     const vb = { x: -18, y: -70, w: W + 36, h: H + 84 };
     const width = Math.round(size * vb.w / vb.h);
@@ -81,7 +84,7 @@ export function medalSVG(level, { size = 220, title = true } = {}) {
   <g fill="${m.ink}" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
     <text x="${CX}" y="56" font-size="12" font-weight="700" letter-spacing="3">LEVEL</text>
     <text x="${CX + 2}" y="104" font-size="44" font-weight="700">${digit}</text>
-    <text x="${CX + 4}" y="124" font-size="9.5" font-weight="700" letter-spacing="1.5">PART ${part}</text>
+    <text x="${CX + 4}" y="124" ${nameStyle} font-weight="700">${name}</text>
   </g>
 </svg>`;
 }

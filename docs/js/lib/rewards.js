@@ -1,6 +1,7 @@
-// Progress through the demos and the two level medals: visiting every Part I
-// demo earns the level 1 medal, every Part II demo the level 2 medal. The medal
-// is given when the user leaves the demo that completed the part (by going to
+// Progress through the demos and the two level medals: visiting every level 1
+// demo (fundamentals) earns the level 1 medal, every level 2 demo (advanced
+// concepts) the level 2 medal; `part` in the catalog is the level. The medal
+// is given when the user leaves the demo that completed the level (by going to
 // another demo or back to the menu), once, with confetti and a short dialog.
 // Progress lives in this browser only (js/lib/store.js: localStorage, or the
 // links between the pages where storage is unavailable).
@@ -75,12 +76,12 @@ export async function celebrateCompletedParts(demos, currentId = null) {
 
 const TEXT = {
     1: {
-        part: 'Part I · Fundamentals',
-        body: 'You have explored every Part I demo: the shape features and error, the deformation Jacobian, its offline estimation and online update, the closed loop, target feasibility, and local stability.',
+        part: 'Level 1 · Fundamentals',
+        body: 'You have explored every level 1 demo: the shape features and error, the deformation Jacobian, its offline estimation and online update, the closed loop, target feasibility, and local stability.',
     },
     2: {
-        part: 'Part II · Advanced concepts',
-        body: 'You have explored every Part II demo: the singular value analysis of the deformation Jacobian, the choice of shape features, the failure modes of the loop, its extensions, and three-dimensional objects.',
+        part: 'Level 2 · Advanced concepts',
+        body: 'You have explored every level 2 demo: the singular value analysis of the deformation Jacobian, the choice of shape features, the failure modes of the loop, its extensions, and three-dimensional objects.',
     },
 };
 
@@ -106,7 +107,7 @@ export function celebrate(level, demos, medals = earnedMedals(), currentId = nul
         const primary = !goOn
             ? h('button', { class: 'button primary', type: 'button', onclick: close }, 'Continue ▶')
             : level === 1
-                ? h('a', { class: 'button primary', href: `demo.html?id=${firstPart2.id}`, onclick: acknowledge }, 'Continue to Part II ▶')
+                ? h('a', { class: 'button primary', href: `demo.html?id=${firstPart2.id}`, onclick: acknowledge }, 'Continue to level 2 ▶')
                 : h('a', { class: 'button primary', href: 'index.html', onclick: acknowledge }, 'Back to all demos');
         const stay = goOn ? h('button', { class: 'button', type: 'button', onclick: close }, 'Keep exploring') : null;
         const medal = h('div', { class: 'medal-stage', html: medalSVG(level, { size: 230 }) });
@@ -136,7 +137,7 @@ export function progressBadge(demos, part, visited = visitedIds(), medals = earn
             `Level ${part} medal`);
     }
     const { done, total } = partProgress(demos, part, visited);
-    return h('span', { class: 'part-progress', title: `Visit all ${total} demos of Part ${part === 1 ? 'I' : 'II'} to earn the level ${part} medal` },
+    return h('span', { class: 'part-progress', title: `Visit all ${total} demos of level ${part} to earn the level ${part} medal` },
         h('span', { class: 'progress-track' }, h('span', { class: 'progress-fill', style: `width: ${(100 * done / total).toFixed(0)}%` })),
         `${done} / ${total} visited`);
 }

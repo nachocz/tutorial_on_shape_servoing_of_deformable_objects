@@ -113,7 +113,7 @@ def unfeasible_points(points, shifts=UNFEASIBLE_SHIFTS) -> np.ndarray:
 
 
 # --------------------------------------------------------------------------- #
-#  The looped rod of Part II (feature choice and combined feature tasks)
+#  The looped rod of Section VI and Appendix E (feature choice, combined feature tasks)
 # --------------------------------------------------------------------------- #
 # Bringing the grippers close together and turning the wrists by -pi and +pi
 # winds the rod into a hanging ring: the tangent turns by 2 pi along the rod.

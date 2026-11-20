@@ -76,9 +76,9 @@ const NAMES = ['bg', 'surface', 'surface-soft', 'ink', 'ink-soft', 'muted', 'lin
     'aqua', 'green', 'rep-points', 'rep-edges', 'rep-angles', 'div-neg', 'div-pos', 'div-mid'];
 
 // palette().rod, palette().gripL, ... (CSS names in camelCase). The page
-// background, canvas, grid, robot, and accent colours depend on the tutorial
-// part (Part II pages and menu cards carry data-part="2"), so the palette is
-// read from the element's context; entity colours are the same in both parts.
+// background, canvas, grid, robot, and accent colours depend on the demo level
+// (level 2 pages and menu cards carry data-part="2"), so the palette is
+// read from the element's context; entity colours are the same in both levels.
 export function palette(el = document.documentElement) {
     const host = (el && el.closest && el.closest('[data-part]')) || document.documentElement;
     const key = host.dataset.part || 'root';

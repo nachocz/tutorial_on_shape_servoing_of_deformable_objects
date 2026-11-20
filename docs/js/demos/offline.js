@@ -52,7 +52,7 @@ export async function mount({ workspace, session, state }) {
     ]);
     fitCard.body.append(out.el);
 
-    const modelCard = card('Optional: model-based estimate $\\vJh_{\\vg}=\\partial\\vg/\\partial\\vq$', 'Part I, Sec. III-C · no probing');
+    const modelCard = card('Optional: model-based estimate $\\vJh_{\\vg}=\\partial\\vg/\\partial\\vq$', 'Appendix A · no probing');
     const setModel = session.stream('set_model', (next) => { S.model = next.model; updateModel(); });
     const bend = slider({ label: 'model bending stiffness ×', min: 0.25, max: 4, value: 1, log: true,
         format: (v) => `×${v.toFixed(2)}`, onInput: (v) => setModel({ bend: v }) });

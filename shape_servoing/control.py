@@ -7,7 +7,7 @@ The control law and the complete shape-servoing loop (Algorithm 1).
 
 `ShapeServoingLoop.step` runs one iteration of Algorithm 1: error, command,
 motion, measurement, and the gated Broyden update of the estimate. Two
-extensions from Part II are optional: a feedforward term J_hat^+ ds*/dt for a
+extensions of Section VIII are optional: a feedforward term J_hat^+ ds*/dt for a
 moving target, and a secondary objective added to the command, optionally
 projected onto Null(J_hat). `FeatureTask` is a secondary objective defined by a
 second feature map, with its own target and Jacobian estimate, e.g. point
@@ -81,7 +81,7 @@ class ShapeServoingLoop:
         self.J_hat = task.chained_jacobian(self.plant.feature_map)
 
     def command(self, e, s_star_rate=None) -> np.ndarray:
-        """u_k = alpha J_hat^+ e_k, plus the optional Part II extensions."""
+        """u_k = alpha J_hat^+ e_k, plus the optional extensions of Section VIII."""
         u = control_law(self.J_hat, e, self.alpha, self.damping)
         if s_star_rate is not None:                                   # moving target
             u = u + np.linalg.pinv(self.J_hat) @ s_star_rate

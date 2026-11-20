@@ -87,10 +87,10 @@
     --div-mid: #2b302d;
 }
 
-/* Part II (advanced concepts): a warm sand palette for the page, canvases,
-   robot arms, and interface accents, so that Part II demos are recognizable at
+/* Level 2 (advanced concepts): a warm sand palette for the page, canvases,
+   robot arms, and interface accents, so that level 2 demos are recognizable at
    a glance. Entity colours (rod, points, target, grippers) do not change.
-   Applied to <html> on Part II demo pages and to the Part II menu section. */
+   Applied to <html> on level 2 demo pages and to the level 2 menu section. */
 [data-part="2"] {
     --bg: #f7f4ee;
     --surface: #fffdf9;

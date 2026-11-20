@@ -10,41 +10,34 @@ import { h } from './ui.js';
 const pad2 = (n) => String(n).padStart(2, '0');
 
 // ------------------------------------------------------------------ citation
-// The citation of the tutorial, in one place. It holds placeholders until the
-// articles appear; update AUTHORS, BIB_AUTHORS, and PUBLICATION (and the README
-// citation) first with the preprints (entry 'misc'; fields such as eprint,
-// archivePrefix, primaryClass) and later with the published articles (entry
-// 'article'; journal, volume, number, pages, doi). The dialog and the BibTeX
-// follow, and the placeholder note disappears once AUTHORS is filled in.
+// The citation of the tutorial (one article; the demos follow it in two levels),
+// in one place. It holds placeholders until the article appears; update AUTHORS,
+// BIB_AUTHORS, and PUBLICATION (and the README citation) first with the preprint
+// (entry 'misc'; fields such as eprint, archivePrefix, primaryClass) and later
+// with the published article (entry 'article'; journal, volume, number, pages,
+// doi). The dialog and the BibTeX follow, and the placeholder note disappears
+// once AUTHORS is filled in.
 const AUTHORS = '<Authors>';                     // citation text
 const BIB_AUTHORS = '<Authors>';                 // BibTeX: 'Last, First and Last, First'
-const PUBLICATION = {
-    1: { details: '<publication details>', year: '<year>', entry: 'misc', fields: { howpublished: '<publication details>' } },
-    2: { details: '<publication details>', year: '<year>', entry: 'misc', fields: { howpublished: '<publication details>' } },
-};
+const PUBLICATION = { details: '<publication details>', year: '<year>', entry: 'misc', fields: { howpublished: '<publication details>' } };
 const PLACEHOLDER = AUTHORS.startsWith('<');
-const TITLES = {
-    1: 'A Tutorial on Shape Servoing of Deformable Objects—Part I: Fundamentals',
-    2: 'A Tutorial on Shape Servoing of Deformable Objects—Part II: Advanced Concepts',
-};
-const BIB_TITLES = {
-    1: 'A Tutorial on Shape Servoing of Deformable Objects---{Part I}: Fundamentals',
-    2: 'A Tutorial on Shape Servoing of Deformable Objects---{Part II}: Advanced Concepts',
-};
+const TITLE = 'A Tutorial on Shape Servoing of Deformable Objects';
+const BIB_TITLE = 'A Tutorial on Shape Servoing of Deformable Objects';
+const LEVELS = { 1: 'Level 1 · Fundamentals', 2: 'Level 2 · Advanced concepts' };
 const demoLabel = (demo) => `Interactive demo ${pad2(demo.number)}: ${demo.title}`;
 
-function citation(part, demo) {
-    const { details, year } = PUBLICATION[part];
-    return `${AUTHORS}, "${TITLES[part]}," ${details}, ${year}.`
+function citation(demo) {
+    const { details, year } = PUBLICATION;
+    return `${AUTHORS}, "${TITLE}," ${details}, ${year}.`
         + (demo ? ` ${demoLabel(demo)}.` : '');
 }
 
-function bibtex(part, demo) {
-    const { entry, year, fields } = PUBLICATION[part];
-    const all = [['author', BIB_AUTHORS], ['title', BIB_TITLES[part]], ...Object.entries(fields),
+function bibtex(demo) {
+    const { entry, year, fields } = PUBLICATION;
+    const all = [['author', BIB_AUTHORS], ['title', BIB_TITLE], ...Object.entries(fields),
         ['year', year], ...(demo ? [['note', demoLabel(demo)]] : [])];
     const width = Math.max(...all.map(([key]) => key.length));
-    return [`@${entry}{shapeservoing_part${part === 1 ? 'I' : 'II'},`,
+    return [`@${entry}{shapeservoing_tutorial,`,
         ...all.map(([key, value]) => `  ${key.padEnd(width)} = {${value}},`), '}'].join('\n');
 }
 
@@ -76,18 +69,15 @@ export function citeDialog(demo = null) {
         return h('div', { class: 'cite-block' },
             h('div', { class: 'cite-block-head' }, h('span', {}, title), copyButton), h('pre', {}, text));
     };
-    const parts = demo ? [demo.part] : [1, 2];
     const close = h('button', { class: 'button', type: 'button' }, 'Close');
     const dialog = h('dialog', { class: 'cite-dialog', 'aria-labelledby': 'citeTitle' },
-        h('p', { class: 'kicker' }, demo ? `Part ${demo.part === 1 ? 'I' : 'II'} · Demo ${pad2(demo.number)}` : 'Interactive tutorial'),
+        h('p', { class: 'kicker' }, demo ? `${LEVELS[demo.part]} · Demo ${pad2(demo.number)}` : 'Interactive tutorial'),
         h('h2', { id: 'citeTitle' }, demo ? 'Cite this demo' : 'Cite the tutorial'),
-        h('p', { class: 'cite-note' }, (PLACEHOLDER ? 'Author names and publication details are placeholders until the articles appear. ' : '')
+        h('p', { class: 'cite-note' }, (PLACEHOLDER ? 'Author names and publication details are placeholders until the article appears. ' : '')
             + 'The link opens this page wherever the tutorial runs locally.'),
         block('Link', stableLink(demo)),
-        parts.flatMap((part) => [
-            block(`Part ${part === 1 ? 'I' : 'II'} · citation`, citation(part, demo)),
-            block(`Part ${part === 1 ? 'I' : 'II'} · BibTeX`, bibtex(part, demo)),
-        ]),
+        block('Citation', citation(demo)),
+        block('BibTeX', bibtex(demo)),
         h('div', { class: 'cite-actions' }, close));
     close.addEventListener('click', () => dialog.close());
     dialog.addEventListener('click', (event) => {           // a click on the backdrop closes

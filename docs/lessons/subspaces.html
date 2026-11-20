@@ -21,9 +21,9 @@
 
 <section class="lesson-block">
     <p class="lesson-kicker">Robot motion when n &lt; m</p>
-    <p>Part I continues to use point-coordinate features. Tracking only two points gives <span class="tex">\vs=[x_1,y_1,x_2,y_2]^{\top}</span>, so <span class="tex">n=4&lt;m=6</span>, and a robot motion decomposes as</p>
+    <p>Sections II–IV of the tutorial use point-coordinate features. Tracking only two points gives <span class="tex">\vs=[x_1,y_1,x_2,y_2]^{\top}</span>, so <span class="tex">n=4&lt;m=6</span>, and a robot motion decomposes as</p>
     <div class="tex-block">\dq=\underbrace{\vJ^{+}\vJ\dq}_{\dq_{\mathrm{task}}\in\Range(\vJ^{\top})}+\underbrace{(\mathbf I-\vJ^{+}\vJ)\dq}_{\dq_{\mathrm{null}}\in\Null(\vJ)}.</div>
-    <p>The red ghost motion changes the grippers and the untracked parts of the rod, but the first-order displacement of both tracked points is zero. Such null-space freedom can support secondary tasks without disturbing the selected point-position task locally. Richer shape descriptors are introduced later, in Part II.</p>
+    <p>The red ghost motion changes the grippers and the untracked parts of the rod, but the first-order displacement of both tracked points is zero. Such null-space freedom can support secondary tasks without disturbing the selected point-position task locally. Richer shape descriptors are introduced later, in Section VI.</p>
 </section>
 
 <section class="lesson-block">

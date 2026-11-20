@@ -20,10 +20,10 @@ const demo = demos[index];
 const prev = demos[index - 1], next = demos[index + 1];
 
 document.title = `${demo.title} · Shape Servoing Demos`;
-// Part II pages use their own palette (css: [data-part="2"]), kept on every Part II demo.
+// Level 2 pages use their own palette (css: [data-part="2"]; `part` is the level).
 document.documentElement.dataset.part = String(demo.part);
-const partName = demo.part === 1 ? 'Part I · Fundamentals' : 'Part II · Advanced concepts';
-const partTag = `<span class="part-tag">${demo.part === 1 ? 'Part I' : 'Part II'}</span>`;
+const partName = demo.part === 1 ? 'Level 1 · Fundamentals' : 'Level 2 · Advanced concepts';
+const partTag = `<span class="part-tag">Level ${demo.part}</span>`;
 document.getElementById('topbarTitle').innerHTML = `${partTag}${demo.part === 1 ? 'Fundamentals' : 'Advanced concepts'} · <strong>${String(demo.number).padStart(2, '0')} ${demo.title}</strong>`;
 document.getElementById('lessonKicker').textContent = `${partName} · Demo ${String(demo.number).padStart(2, '0')}`;
 document.getElementById('lessonTitle').textContent = demo.title;

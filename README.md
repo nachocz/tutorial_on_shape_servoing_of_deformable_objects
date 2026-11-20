@@ -1,6 +1,6 @@
 # Shape servoing of deformable objects: tutorial code and interactive demos
 
-Code and interactive demos for the two-part tutorial *A Tutorial on Shape Servoing of Deformable Objects* (Part I: Fundamentals; Part II: Advanced Concepts). They implement the running example of the tutorial, an elastic rod held by two robot grippers and observed by a camera, and reproduce the numerical results of both parts.
+Code and interactive demos for the tutorial *A Tutorial on Shape Servoing of Deformable Objects*. The demos follow the article in two levels: level 1, fundamentals (Sections II-IV, Demos 01-07), and level 2, advanced concepts (Sections V-VIII, Demos 08-12). They implement the running example of the tutorial, an elastic rod held by two robot grippers and observed by a camera, and reproduce the numerical results of the article and its supplementary material.
 
 **Interactive demos: <https://nachocz.github.io/tutorial_on_shape_servoing_of_deformable_objects/>**
 
@@ -98,7 +98,7 @@ shape_servoing/
 - The rod has rest length 6 (simulation units), 25 nodes, stretching and bending stiffness, and gravity. Each equilibrium minimizes the total potential energy for the given grasp, starting from the previous equilibrium when the rod moves continuously.
 - Several demos show the *exact* Jacobian, computed by finite differences of the simulated equilibrium. This is not possible on a real system; the controller uses only estimates unless a demo states otherwise.
 - The robot arms are drawn for illustration only; the robot coordinates are the gripper poses q = [x_L, y_L, theta_L, x_R, y_R, theta_R].
-- In the combined task of Part II (Fig. 8, Demo 11), only the point-coordinate Jacobian is estimated (offline regression around the looped rod, then Broyden's rule after every iteration); the curvature Jacobian is obtained from it by the chain rule, through the known derivative of the turning angles with respect to the tracked points.
+- In the combined task of Appendix E (Fig. S3, Demo 11), only the point-coordinate Jacobian is estimated (offline regression around the looped rod, then Broyden's rule after every iteration); the curvature Jacobian is obtained from it by the chain rule, through the known derivative of the turning angles with respect to the tracked points.
 
 ## Reproducing the tutorial's numbers
 
@@ -107,22 +107,16 @@ python run.py --tests              # creates .venv on first use, installs numpy,
 python -m unittest discover tests  # the same, in an environment with numpy
 ```
 
-The tests check the values quoted in both parts of the tutorial and the agreement of the demo pages with the Python package. [TESTS.md](TESTS.md) lists what each test checks.
+The tests check the values quoted in the tutorial and its supplementary material and the agreement of the demo pages with the Python package. [TESTS.md](TESTS.md) lists what each test checks.
 
 ## Citation
 
-The author names and publication details are placeholders until the articles appear. The demos give the same entries (⋯ → *Cite the tutorial*), from `docs/js/lib/tools.js`; update both together.
+The author names and publication details are placeholders until the article appears. The demos give the same entries (⋯ → *Cite the tutorial*), from `docs/js/lib/tools.js`; update both together.
 
 ```bibtex
-@misc{shapeservoing_partI,
+@misc{shapeservoing_tutorial,
   author       = {<Authors>},
-  title        = {A Tutorial on Shape Servoing of Deformable Objects---{Part I}: Fundamentals},
-  howpublished = {<publication details>},
-  year         = {<year>},
-}
-@misc{shapeservoing_partII,
-  author       = {<Authors>},
-  title        = {A Tutorial on Shape Servoing of Deformable Objects---{Part II}: Advanced Concepts},
+  title        = {A Tutorial on Shape Servoing of Deformable Objects},
   howpublished = {<publication details>},
   year         = {<year>},
 }

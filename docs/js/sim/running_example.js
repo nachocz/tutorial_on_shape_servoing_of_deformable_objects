@@ -83,7 +83,7 @@ export function unfeasiblePoints(points, shifts = UNFEASIBLE_SHIFTS) {
     return out;
 }
 
-// ------------------------------------------------------------------ the looped rod of Part II
+// ------------------------------------------------------------------ the looped rod of Section VI
 // Bringing the grippers close together and turning the wrists by -pi and +pi winds
 // the rod into a hanging ring: the tangent turns by 2 pi along the rod.
 export const Q_RING = [-0.4, 2.5, 0.0, 0.4, 2.5, 0.0];        // grasp before winding

@@ -46,7 +46,7 @@ def broyden_update(J_hat, dq, ds, relaxation: float = 1.0):
     Returns the updated estimate and the prediction error r = ds - J_hat dq.
     The correction changes the estimate only along dq. `relaxation` < 1 applies
     only part of the correction (1 is Broyden's rule as in the tutorial; the
-    feature-comparison runs of Part II use 0.4).
+    feature-comparison runs of Section VI use 0.4).
     """
     dq = np.asarray(dq, float)
     r = np.asarray(ds, float) - J_hat @ dq

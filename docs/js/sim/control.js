@@ -5,7 +5,7 @@
 //     u = alpha J_hat^T (J_hat J_hat^T + mu^2 I)^{-1} e   (damped least squares)
 //
 // `ShapeServoingLoop.step` runs one iteration: error, command, motion,
-// measurement, and the gated Broyden update. Part II extensions: a feedforward
+// measurement, and the gated Broyden update. Extensions (Section VIII): a feedforward
 // term, a secondary objective (optionally projected onto Null(J_hat)), and
 // `FeatureTask`, a secondary objective defined by a second feature map.
 import { featureMapJacobian, featureVector } from './features.js';
@@ -52,7 +52,7 @@ export class ShapeServoingLoop {
         this.J_hat = task.chainedJacobian(this.plant.featureMap);
     }
 
-    // u_k = alpha J_hat^+ e_k, plus the optional Part II extensions.
+    // u_k = alpha J_hat^+ e_k, plus the optional extensions of Section VIII.
     command(e, sStarRate = null) {
         let u = controlLaw(this.J_hat, e, this.alpha, this.damping);
         if (sStarRate) u = add(u, matvec(pinv(this.J_hat), sStarRate));            // moving target

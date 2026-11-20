@@ -111,7 +111,7 @@ class Rod:
         return nodes
 
     # ------------------------------------------------------------------ #
-    #  Deformation imposed on the rod (the cost compared in Part II)
+    #  Deformation imposed on the rod (the cost compared in Section VI)
     # ------------------------------------------------------------------ #
     def axial_strain(self, nodes) -> np.ndarray:
         """Axial strain of every edge, |e_j| / h - 1 (positive when stretched)."""
